@@ -50,7 +50,7 @@
           </li>
           <li><a href="">News</a></li>
           <li><a href="">Contact</a></li>
-          <?echo '<li class="header-hname">'.$hname.'</li>';?>
+          <?echo '<li>'.$hname.'</li>';?>
       	</ul>
 			</nav>
 		</div>
