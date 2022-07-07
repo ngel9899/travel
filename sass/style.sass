@@ -1,0 +1,150 @@
+*
+	margin: 0
+	padding: 0
+	box-sizing: border-box
+
+img
+	max-width: 100%
+.header
+	border-bottom: 1px solid #dcdcdc
+	display: flex
+	flex-wrap: nowrap
+
+.hotelinfo-title
+	font-size: 22pt
+	font-style: italic
+
+.logo
+	width: 120px
+
+.header-menu
+	display: flex
+	width: 100%
+	height: 120px
+
+
+.header-nav
+	display: flex
+	justify-content: space-around
+	align-items: center
+	align-self: center
+
+
+.header-nav-ul
+	li
+		font-size: 20px
+		padding: 10px 20px
+		margin: 0 10px
+		&:hover
+			background-color: darken(#F9AD81, 6.25%)
+		a
+			text-decoration: none
+			color: black
+.header-menu .header-nav 
+	float: right
+	margin-right: 30px
+	display: block
+
+.header-menu .header-nav ul li 
+	list-style: none
+	display: inline-block
+	line-height: 40px
+	position: relative
+	z-index: 1
+	border-radius: 20px
+
+
+.header-menu .header-nav ul li:hover>.drop-menu 
+	top: 60px
+	opacity: 1
+	visibility: visible
+	z-index: 999
+
+
+.header-menu .header-nav ul li .drop-menu 
+	position: absolute
+	left: -10px
+	top: 100px
+	background: #ffffff
+	width: 220px
+	opacity: 0
+	visibility: hidden
+	z-index: -1
+	-webkit-transition: 0.3s
+	transition: 0.3s
+
+.header-menu .header-nav ul li .drop-menu li 
+	display: block
+	margin-right: 0
+	line-height: 0
+	padding: 0
+
+
+.header-menu .header-nav ul li .drop-menu li a 
+	color: #242424
+	display: block
+	padding: 30px 20px
+	font-size: 16px
+	font-weight: 600
+	letter-spacing: 0
+	border-radius: 20px
+
+
+.header-menu .header-nav ul li .drop-menu li:hover>a 
+	background: #F9AD81
+	color: #ffffff
+
+
+.header-menu .header-nav ul li .drop-menu li:hover>a::after 
+	display: none
+
+.gallery-left
+	width: 50%
+	display: inline-block
+	margin-left: 30px
+.gallery 
+	width:100%
+	position: relative
+	padding: 0px 60px
+	display: inline-block
+
+.slick-list 
+	overflow: hidden
+
+.slider__item 
+	padding: 0px 15px
+
+.slick-slider
+	display: none
+
+.gallery .slick-arrow
+	position: absolute
+	top: 50%
+	margin: -15px 0 0 0
+	z-index: 2
+	font-size: 0
+	width: 30px
+	height: 30px
+
+.gallery .slick-arrow.slick-prev
+	left: 0
+	border: 0
+	background: url('https://img.icons8.com/ios/50/000000/long-arrow-left.png') 0 0 / 100% no-repeat
+
+.gallery .slick-arrow.slick-next
+	right: 0
+	border: 0
+	background: url('https://img.icons8.com/ios/50/000000/long-arrow-right.png') 0 0 / 100% no-repeat
+
+.gallery-right
+	width:40%
+	display: inline-block
+	align-items: top
+	padding: 0 40px
+	height: 100%
+
+.gallery-right-title
+	text-align: center
+
+.main
+	display: flex
