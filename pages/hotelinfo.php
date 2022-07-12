@@ -28,31 +28,41 @@
       $hstars = $row['stars'];
       $hcost = $row['cost'];
       $hinfo = $row['info'];
+			$hid =$row['id'];
       mysqli_free_result($res);
   }
   ?>
-	<header class="header">
+	<header class="header container">
 		<div class="header-menu">
-			<div class="logo">
-				<a href=""><img src="../images/hotel-logo.jpg"></a>
+			<div class="row header-menu">
+					<nav class="col-sm-12 col-md-12 col-lg-12">
+							<?
+									if (isset($_GET['page'])) {
+										$page = $_GET['page'];
+									}
+									include_once "menu.php";
+							?>
+					</nav>
 			</div>
 			<nav class="header-nav">
 			  <ul class="header-nav-ul">
-					<li><a href="">Home</a></li>
-					<li><a href="">About</a></li>
-					<li><a href="">Rooms</a></li>
-					<li class="drop-menu-active"><a href="">Pages</a>
-              <ul class="drop-menu">
-                  <li><a href="">About Us</a></li>
-                  <li><a href="">Rooms</a></li>
-                  <li><a href="">Services</a></li>
-              </ul>
-          </li>
-          <li><a href="">News</a></li>
-          <li><a href="">Contact</a></li>
-          <?echo '<li>'.$hname.'</li>';?>
+					<section class="col-sm-12 col-md-12 col-lg-12">
+							<?
+									if (isset($_GET['page'])) {
+											$page = $_GET['page'];
+											if ($page == 1) include_once "tours.php";
+											if ($page == 2) include_once "comments.php";
+											if ($page == 3) include_once "registration.php";
+											if ($page == 4) include_once "admin.php";
+											if ($page == 5) include_once "privat.php";
+									}
+							?>
+					</section>
       	</ul>
 			</nav>
+		</div>
+		<div class="block-hname">
+			<?echo '<h2 class="hname">'.$hname.'</h2>';?>
 		</div>
 	</header>
 	<section class="main">
@@ -76,12 +86,30 @@
 				</div>
 			</div>
 		</div>
+	</section>
+	<section>
+		<div class="block-table">
+			<div class="col-sm-6 col-md-6 col-lg-6 left">
+				<?
+				$select = 'SELECT * from comments, users where hotelid = '.$hid.' and userid = users.id order by login';
+		    $res = mysqli_query($link, $select);
+		    echo '<table class="table table-striped">';
+		    while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+		      echo '<tr>';
+		      echo '<td>' . $row['comment'] . '</td>';
+		      echo '<td>' . $row['login'] . '</td>';
+		      echo '</tr>';
+		    }
+				mysqli_free_result($res);
+				?>
+			</div>
+		</div>
+	</section>
 		<script type="text/javascript">
 			$('.gallery').slick({
 				arrows:true,
 				speed: 900,
 			});
 		</script>
-	</section>
 </body>
 </html>

@@ -148,7 +148,7 @@
                     exit();
                 $cityid = $_POST['hcity'];
                 $countryid = $linkCityToCountry[$cityid];
-                $insertHotel = 'insert into hotels (hotel, cityid, countryid, stars, cost, info)
+                $insertHotel = 'INSERT into hotels (hotel, cityid, countryid, stars, cost, info)
                 values ("'.$hotel.'", '.$cityid;
                 $insertHotel .= "," . $countryid . "," . $stars . "," . $cost . ',"'.$info.'")';
                 mysqli_query($link, $insertHotel);

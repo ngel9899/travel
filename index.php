@@ -40,6 +40,7 @@ include_once "pages/functions.php";
                         if ($page == 2) include_once "pages/comments.php";
                         if ($page == 3) include_once "pages/registration.php";
                         if ($page == 4) include_once "pages/admin.php";
+                        if ($page == 5) include_once "pages/privat.php";
                     }
                 ?>
             </section>

@@ -11,4 +11,7 @@
   <li <? echo ($page == 4) ? "class='active'" : ""?>>
     <a href="index.php?page=4">Admin Forms</a>
   </li>
+  <li <? echo ($page == 5) ? "class='active'" : ""?>>
+    <a href="index.php?page=5">Privat</a>
+  </li>
 </ul>
