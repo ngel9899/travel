@@ -62,6 +62,9 @@ function login($login, $pass)
         if ($row['roleid'] == 1) {
             $_SESSION['radmin'] = $login;
         }
+        if (!isset($_COOKIE['roleid'])) {
+            setcookie('roleid' , $row['roleid'], time() + 120);
+        }
         return true;
     } else {
         echo "<h3><span style='color: red;'>No such User!</span></h3>";

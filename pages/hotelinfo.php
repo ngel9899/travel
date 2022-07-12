@@ -1,3 +1,7 @@
+<?
+session_start();
+include_once "functions.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Info</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/myStyle.css
-    ">
+    <link rel="stylesheet" type="text/css" href="../css/myStyle.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 	  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
@@ -17,7 +20,6 @@
 </head>
 <body>
   <?
-  include_once "functions.php";
   if (isset($_GET['hotel'])) {
       $hotel = $_GET['hotel'];
       $link = connect();
@@ -30,6 +32,13 @@
       $hinfo = $row['info'];
 			$hid =$row['id'];
       mysqli_free_result($res);
+			if (isset($_COOKIE['roleid'])) {
+				if ($_COOKIE['roleid'] == 1) {
+					$_SESSION['radmin'];
+				}else {
+					$_SESSION['ruser'];
+				}
+			}
   }
   ?>
 	<header class="header container">
@@ -41,37 +50,47 @@
 										$page = $_GET['page'];
 									}
 							?>
-									<ul class="nav nav-tabs nav-justified">
-									  <li <? echo ($page == 1) ? "class='active'" : ""?>>
-									    <a href="../index.php?page=1">Tours</a>
-									  </li>
-									  <li <? echo ($page == 2) ? "class='active'" : ""?>>
-									    <a href="../index.php?page=2">Comments</a>
-									  </li>
-									  <li <? echo ($page == 3) ? "class='active'" : ""?>>
-									    <a href="../index.php?page=3">Registration</a>
-									  </li>
-									  <li <? echo ($page == 4) ? "class='active'" : ""?>>
-									    <a href="../index.php?page=4">Admin Forms</a>
-									  </li>
-									  <li <? echo ($page == 5) ? "class='active'" : ""?>>
-									    <a href="../index.php?page=5">Privat</a>
-									  </li>
-									</ul>
+							<ul class="nav nav-tabs nav-justified">
+								<li <? echo ($page == 1) ? "class='active'" : ""?>>
+									<a href="../index.php?page=1">Tours</a>
+								</li>
+								<? if ($_SESSION['radmin'] || $_SESSION['ruser']){ ?>
+									<li <? echo ($page == 2) ? "class='active'" : ""?>>
+										<a href="../index.php?page=2">Comments</a>
+									</li>
+								<? } ?>
+								<li <? echo ($page == 3) ? "class='active'" : ""?>>
+									<a href="../index.php?page=3">Registration</a>
+								</li>
+								<? if ($_SESSION['radmin']){ ?>
+									<li <? echo ($page == 4) ? "class='active'" : ""?>>
+										<a href="../index.php?page=4">Admin Forms</a>
+									</li>
+									<li <? echo ($page == 5) ? "class='active'" : ""?>>
+										<a href="../index.php?page=5">Privat</a>
+									</li>
+								<? } ?>
+							</ul>
 					</nav>
 			</div>
 			<nav class="header-nav">
 			  <ul class="header-nav-ul">
 					<section class="col-sm-12 col-md-12 col-lg-12">
 							<?
-									if (isset($_GET['page'])) {
-											$page = $_GET['page'];
-											if ($page == 1) include_once "tours.php";
-											if ($page == 2) include_once "comments.php";
-											if ($page == 3) include_once "registration.php";
-											if ($page == 4) include_once "admin.php";
-											if ($page == 5) include_once "privat.php";
+							if (isset($_GET['page'])) {
+									$page = $_GET['page'];
+									if ($page == 1) include_once "tours.php";
+									if ($_SESSION['radmin'] || $_SESSION['ruser']) {
+										if ($page == 2) include_once "comments.php";
 									}
+									if (isset($_SESSION[''])) {
+										if ($page == 3) include_once "registration.php";
+									}
+									if ($_SESSION['radmin']) {
+										if ($page == 4) include_once "admin.php";
+										if ($page == 5) include_once "privat.php";
+									}
+							}
 							?>
 					</section>
       	</ul>

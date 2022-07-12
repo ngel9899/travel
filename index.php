@@ -11,7 +11,6 @@ include_once "pages/functions.php";
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Travel Agency</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/info.css">
 </head>
 <body>
   <?include_once "pages/login.php";?>
@@ -37,10 +36,16 @@ include_once "pages/functions.php";
                     if (isset($_GET['page'])) {
                         $page = $_GET['page'];
                         if ($page == 1) include_once "pages/tours.php";
-                        if ($page == 2) include_once "pages/comments.php";
-                        if ($page == 3) include_once "pages/registration.php";
-                        if ($page == 4) include_once "pages/admin.php";
-                        if ($page == 5) include_once "pages/privat.php";
+                        if ($_SESSION['radmin'] || $_SESSION['ruser']) {
+                          if ($page == 2) include_once "pages/comments.php";
+                        }
+                        if (!$_SESSION['radmin'] || !$_SESSION['ruser']) {
+      										if ($page == 3) include_once "pages/registration.php";
+      									}
+                        if ($_SESSION['radmin']) {
+                          if ($page == 4) include_once "pages/admin.php";
+                          if ($page == 5) include_once "pages/privat.php";
+                        }
                     }
                 ?>
             </section>
